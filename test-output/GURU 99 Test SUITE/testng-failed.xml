@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="-1" guice-stage="DEVELOPMENT" name="Failed suite [GURU 99 Test SUITE]">
+  <listeners>
+    <listener class-name="com.guru99.qa.util.CustomListener"/>
+  </listeners>
+  <test name="Logging In for the 100th Time(failed)">
+    <classes>
+      <class name="com.guru99.qa.testcases.LoginTestUsingListeners">
+        <methods>
+          <include name="tearDown"/>
+          <include name="titleTest"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- com.guru99.qa.testcases.LoginTestUsingListeners -->
+    </classes>
+  </test> <!-- Logging In for the 100th Time(failed) -->
+</suite> <!-- Failed suite [GURU 99 Test SUITE] -->

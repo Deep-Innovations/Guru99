@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="GURU 99 Test SUITE">
+	<listeners>
+		<listener class-name="com.guru99.qa.util.CustomListener"></listener>
+	</listeners>
+	<test name="Logging In for the 100th Time">
+		<classes>
+			<class name="com.guru99.qa.testcases.LoginTestUsingListeners"></class>
+		</classes>
+	</test>
+</suite>

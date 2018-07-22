@@ -1,0 +1,6 @@
+02:10:16.955 ERROR testcases.LoginPageTest -java.lang.AssertionError: expected [Guru909 Bank Home Page] but found [Guru99 Bank Home Page]
+02:10:21.067 INFO  LoginPage -works MOTHERFUCKER!
+18:00:50.704 ERROR testcases.LoginPageTest -java.lang.AssertionError: expected [Guru909 Bank Home Page] but found [Guru99 Bank Home Page]
+18:00:54.853 INFO  LoginPage -works MOTHERFUCKER!
+18:02:05.876 ERROR testcases.LoginPageTest -java.lang.AssertionError: expected [Guru909 Bank Home Page] but found [Guru99 Bank Home Page]
+18:02:15.679 INFO  LoginPage -works MOTHERFUCKER!

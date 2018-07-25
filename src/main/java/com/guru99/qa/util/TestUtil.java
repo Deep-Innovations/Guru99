@@ -1,11 +1,15 @@
 package com.guru99.qa.util;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestResult;
@@ -21,6 +25,7 @@ public class TestUtil extends TestBase {
 	public  ExtentReports extent;
 	public  ExtentTest extentTest;
 	public ITestResult result;
+	
 	
 	
 	
@@ -50,6 +55,21 @@ public class TestUtil extends TestBase {
 		FileUtils.copyFile(source, finalDestination);
 		return destination;
 	}
+	
+	public Properties writeToConfig(String key, String value) {
+		prop.setProperty(key, value);
+		try {
+			prop.store(new FileOutputStream("/Users/deepsnaps/eclipse-workspace/guru99PracticePOM"
+					+ "/src/main/java/com/guru99/qa/config/config.properties"), null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return prop;
+	}
+	
+	
+	
+	
 	
 	
 	

@@ -71,9 +71,8 @@ public class CustomListener implements ITestListener {
 
 	public void onFinish(ITestContext context) {
 		// starts after the <test> tag of the xml file!
-		report.endTest(test);
 		report.flush();
-		report.close();
+		
 		
 	}
 

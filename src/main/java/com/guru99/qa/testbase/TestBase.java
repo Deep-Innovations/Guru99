@@ -1,7 +1,11 @@
 package com.guru99.qa.testbase;
 
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.OutputStream;
 /*import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;*/
@@ -24,11 +28,14 @@ public class TestBase {
 			prop = new Properties();
 			FileInputStream ip = new FileInputStream("/Users/deepsnaps/eclipse-workspace/guru99PracticePOM"
 					+ "/src/main/java/com/guru99/qa/config/config.properties");
-			prop.load(ip);
-		} catch (Exception e) {
+			prop.load(ip);	
+			ip.close();
+		} 
+		catch (Exception e) {
 			  e.printStackTrace();
 		 } 
 	}
+	
 
 	public static void initialization(String browserName) {
 		//String browserName = prop.getProperty("browser");

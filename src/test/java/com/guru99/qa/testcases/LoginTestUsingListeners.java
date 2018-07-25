@@ -22,7 +22,7 @@ public class LoginTestUsingListeners extends TestBase {
 
 	@BeforeMethod
 	public void setUp() {
-		initialization("ff");
+		initialization("chrome");
 		loginPage = new LoginPage();
 		homePage = new HomePage();
 	}
@@ -30,7 +30,8 @@ public class LoginTestUsingListeners extends TestBase {
 	@Test(priority=1)
 	public void titleTest() {
 		String homeTitle = loginPage.verifyLoginPageTitle();
-		Assert.assertEquals(homeTitle, "Guru is so cool");
+		Assert.assertEquals(homeTitle, "Guru99 Bank Home Page");
+		
 	}
 	@Test(priority=2)
 	public void loginTest() {

@@ -6,13 +6,13 @@
   </listeners>
   <test name="Logging In for the 100th Time(failed)">
     <classes>
-      <class name="com.guru99.qa.testcases.LoginTestUsingListeners">
+      <class name="com.guru99.qa.testcases.AddNewCustoTest">
         <methods>
-          <include name="tearDown"/>
-          <include name="titleTest"/>
+          <include name="enterNewCustoInfo"/>
           <include name="setUp"/>
+          <include name="hpTitleVisibility"/>
         </methods>
-      </class> <!-- com.guru99.qa.testcases.LoginTestUsingListeners -->
+      </class> <!-- com.guru99.qa.testcases.AddNewCustoTest -->
     </classes>
   </test> <!-- Logging In for the 100th Time(failed) -->
 </suite> <!-- Failed suite [GURU 99 Test SUITE] -->

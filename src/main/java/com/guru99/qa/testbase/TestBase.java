@@ -29,7 +29,6 @@ public class TestBase {
 			FileInputStream ip = new FileInputStream("/Users/deepsnaps/eclipse-workspace/guru99PracticePOM"
 					+ "/src/main/java/com/guru99/qa/config/config.properties");
 			prop.load(ip);	
-			ip.close();
 		} 
 		catch (Exception e) {
 			  e.printStackTrace();
@@ -39,6 +38,7 @@ public class TestBase {
 
 	public static void initialization(String browserName) {
 		//String browserName = prop.getProperty("browser");
+		
 		
 		if (browserName.equals("chrome")) {
 			System.setProperty("webdriver.chrome.driver", "/Users/deepsnaps/eclipse-workspace/chromedriver");

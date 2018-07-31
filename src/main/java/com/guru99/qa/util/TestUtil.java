@@ -1,6 +1,7 @@
 package com.guru99.qa.util;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,23 +10,27 @@ import java.util.Date;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestResult;
 
 import com.guru99.qa.testbase.TestBase;
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
+
 
 public class TestUtil extends TestBase {
 	public static long PAGE_LOAD_TIMEOUT = 20;
 	public static long IMPLICIT_WAIT = 10;
-	public  ExtentReports extent;
-	public  ExtentTest extentTest;
-	public ITestResult result;
 	
+	public static String TESTDATA_SHEET_PATH = "/Users/deepsnaps/eclipse-workspace/guru99PracticePOM"
+			+ "/src/main/java/com/guru99/qa/testdata/guru99dataEXCEL.xlsx";
+	
+	static Workbook book;
+	static Sheet sheet;
 	
 	
 	
@@ -34,7 +39,7 @@ public class TestUtil extends TestBase {
 	}
 	
 	
-	
+	//Get ScreenShot - First Way to do it:
 	public static void getScreenShot(String fileName) throws IOException {
 		// 1. Take Screenshot and store it as a file format.. rmr take screen shot returns file object so create object
 		// of the class File...
@@ -46,6 +51,7 @@ public class TestUtil extends TestBase {
 		
 	}
 	
+	//Get ScreenShot - Second Way to do it:
 	public static String getScreenShotForExtent(String nameYourFile) throws IOException {
 		String fileDate = new SimpleDateFormat("MM-dd-yyyy - hh:mm:ss").format(new Date());
 		TakesScreenshot takeshot = (TakesScreenshot) driver;
@@ -56,7 +62,8 @@ public class TestUtil extends TestBase {
 		return destination;
 	}
 	
-	public Properties writeToConfig(String key, String value) {
+	//How to write to config.properties file:
+	public static void writeToConfig(String key, String value) {
 		prop.setProperty(key, value);
 		try {
 			prop.store(new FileOutputStream("/Users/deepsnaps/eclipse-workspace/guru99PracticePOM"
@@ -64,103 +71,42 @@ public class TestUtil extends TestBase {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return prop;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-/*	public ExtentReports setExtentPath() {
-		extent = new ExtentReports(System.getProperty("user.dir")+"/GuruExtentReports/ExtentReport.html", true);
-		extent.addSystemInfo("Computer", "DeepSnaps' MacBook");
-		extent.addSystemInfo("Enviornment", "Automation Testing");
-		return extent;
-	}
-	*/
-	
-	
-	
-	
-	/*public ExtentTest beginExtentLogging(String testName) {
-		extentTest = extent.startTest(testName);
-		return extentTest;
+	//How to get Test Data from Excel File:
+	public static Object[][] getTestData(String sheetName) {
+		FileInputStream file = null;
+		try {
+			file = new FileInputStream(TESTDATA_SHEET_PATH);
+		}
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		try {
+			book = WorkbookFactory.create(file);
+		}
+		catch (InvalidFormatException e) {
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 		
-	}*/
-	
-	
-	
-	
-	/*public void loggingIt(LogStatus logStatus, String details) {
-		extentTest.log(logStatus, details);
+		sheet = book.getSheet(sheetName);
+		Object[][] data = new Object[sheet.getLastRowNum()][sheet.getRow(0).getLastCellNum()];
+		
+		for (int i = 0; i < sheet.getLastRowNum(); i++) {
+			for (int k = 0; k < sheet.getRow(0).getLastCellNum(); k++) {
+				data[i][k] = sheet.getRow(i+1).getCell(k).toString();
+			}
+		}
+		return data;
+		
 		
 	}
-	*/
-	
-	
-	/*public void attachScreenshotExtent(String typeItOut) throws IOException {
-		String swamiLocation = TestUtil.getScreenShotForExtent(typeItOut);
-		extentTest.addScreenCapture(swamiLocation);
-		
-		//WORKS
-	}*/
 	
 	
 	
-	/*public void ifThenLogStatusMethod() throws InterruptedException, IOException {
-		result = null;
-			if (result.getStatus()==ITestResult.FAILURE) {
-				extentTest.log(LogStatus.FAIL, "Test Case Failed is: " + result.getName());
-				extentTest.log(LogStatus.FAIL, "Test Case Failed is: " + result.getThrowable());
-				
-				String screenshotPath = TestUtil.getScreenShotForExtent(whatsYourName);
-				extentTest.log(LogStatus.FAIL, extentTest.addScreenCapture(screenshotPath));
-			}
-			else if (result.getStatus()==ITestResult.SKIP) {
-				extentTest.log(LogStatus.SKIP, "Test Case Skipped is: " + result.getName());
-			}
-			else if (result.getStatus()==ITestResult.SUCCESS) {
-				extentTest.log(LogStatus.PASS, "Test Case Passed is: " + result.getName());
-			}
-			
-		//DOES NOT WORK
-			
-	}*/
-	
-	
-	/*public void ifThenLogStatusMethod(int testStatus) throws InterruptedException, IOException {
-		testStatus = result.getStatus();
-			if (result.getStatus()==ITestResult.FAILURE) {
-				extentTest.log(LogStatus.FAIL, "Test Case Failed is: " + result.getName());
-				extentTest.log(LogStatus.FAIL, "Test Case Failed is: " + result.getThrowable());
-				
-				String screenshotPath = TestUtil.getScreenShotForExtent(whatsYourName);
-				extentTest.log(LogStatus.FAIL, extentTest.addScreenCapture(screenshotPath));
-			}
-			else if (result.getStatus()==ITestResult.SKIP) {
-				extentTest.log(LogStatus.SKIP, "Test Case Skipped is: " + result.getName());
-			}
-			else if (result.getStatus()==ITestResult.SUCCESS) {
-				extentTest.log(LogStatus.PASS, "Test Case Passed is: " + result.getName());
-			}
-		//WORKS!
-	}*/
-	
-	
-	
-	
-	/*public void afterTest() {
-		extent.flush();
-		extent.close();
-	}
-	
-	public void afterAllTests() {
-		extent.endTest(extentTest);
-		driver.quit();
-	}*/
 	
 	
 	

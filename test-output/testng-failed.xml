@@ -5,7 +5,7 @@
     <classes>
       <class name="com.guru99.qa.testcases.AddNewCustoTest">
         <methods>
-          <include name="enterNewCustoInfo"/>
+          <include name="enterNewCustoInfo" invocation-numbers="0 1 2"/>
           <include name="setUp"/>
           <include name="tearDown"/>
         </methods>

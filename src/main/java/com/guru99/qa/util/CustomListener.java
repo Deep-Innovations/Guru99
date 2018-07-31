@@ -13,6 +13,8 @@ import com.relevantcodes.extentreports.LogStatus;
 public class CustomListener implements ITestListener {
 	public ExtentReports report;
 	public ExtentTest test;
+
+	
 	
 
 	public void onTestStart(ITestResult result) {
@@ -64,7 +66,7 @@ public class CustomListener implements ITestListener {
 		 * }
 		 */
 		
-		report = new ExtentReports(System.getProperty("user.dir") + "/GuruExtentReports/ExtentReports.html", true);
+		report = new ExtentReports(System.getProperty("user.dir") + "/GuruExtentReports/ExtentReports.html", false);
 		report.addSystemInfo("Computer", "DeepSnap's MBP");
 		report.addSystemInfo("Enviornment", "Automation");
 	}
@@ -72,6 +74,7 @@ public class CustomListener implements ITestListener {
 	public void onFinish(ITestContext context) {
 		// starts after the <test> tag of the xml file!
 		report.flush();
+		
 		
 		
 	}
